@@ -62,10 +62,11 @@ import{javascript}from'./javascript.mjs';
 import{json}from'./json.mjs';
 import{markdown}from'./markdown.mjs';
 import{xml}from'./xml.mjs';
+import{languages}from'./language-data.mjs';
 
 document.querySelectorAll('pre').forEach(x=>x.replaceWith(new EditorView({
 	doc:x.textContent,
-	extensions:[setup,{cpp,css,html,javascript,json,markdown,xml}[x.dataset.lang]()]
+	extensions:[setup,{cpp,css,html,javascript,json,markdown,xml}[x.dataset.lang]({codeLanguages:languages})]
 }).dom))
 </script>
 

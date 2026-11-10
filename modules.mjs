@@ -3,7 +3,10 @@ bun_dle=async()=>await Bun.build({
 	entrypoints:[...new Bun.Glob('./src/*.mjs').scanSync('.')],
 	minify:true,
 	outdir:'./dst',
-	naming:"[dir]/[name].mjs",
+	naming:{
+		entry:'[name].mjs',
+		chunk:'chunk/[hash].mjs'
+	},
 	splitting:true
 }),
 html_tmpl=c=>x=>({...x,html:`\

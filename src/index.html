@@ -10,7 +10,10 @@ export default async x=>(
 		desc:'code editor coponents'
 	})(x),
 	x.html=new HTMLRewriter()
-	.on('#ml',{element:async e=>e.append(await['index.mjs',...[...await new Bun.Glob('!(index).mjs').scanSync('./dst')].sort()].reduce(async(a,x)=>`${await a}
+	.on('#ml',{element:async e=>e.append(await[
+		'index.mjs','language-data.mjs',
+		...[...await new Bun.Glob('!(index|language_data).mjs').scanSync('./dst')].sort()
+	].reduce(async(a,x)=>`${await a}
 	<li>
 		<a href="./${x}">${x}</a>
 		<pre>${await Bun.file(`./src/${x}`).text()}</pre>
