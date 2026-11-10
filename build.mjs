@@ -5,7 +5,8 @@ await Bun.build({
 	entrypoints:[...new Bun.Glob('./src/*.mjs').scanSync('.')],
 	minify:true,
 	outdir:'./dst',
-	naming: "[dir]/[name].mjs"
+	naming:"[dir]/[name].mjs",
+	splitting:true
 });
 await Bun.write('./dst/_redirects',`\
 /src/:src https://6ca.me/src/:src 301
