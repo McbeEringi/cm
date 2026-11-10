@@ -1,31 +1,57 @@
 <script type="build">
 import tmpl from'html_tmpl';
 
-export default tmpl({
-	title:'cm test',
-	desc:'codemirror test'
-});
+const sample={
+	cpp:`void main(){
+	gl_FragColor=vec4(1);
+}`,
+	css:`:root{color:#f0f;}`,
+	html:`<!DOCTYPE html>
+<style>:root{color:#f0f;}</style>
+<script type="module">console.log('hello world!');<\/script>`,
+	json:`{"hello":"world!"}`,
+	markdown:`# hello world!
+\`\`\`python
+"""code goes here..."""
+\`\`\`
+<img src="">
+`,
+	xml:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+<defs>
+	<style>path{stroke:#999;shape-rendering:crispEdges;}</style>
+	<rect id="b" width="100" height="100"/>
+	<pattern id="g0" patternUnits="userSpaceOnUse" width="10" height="10">
+		<path d="M4,5h2M5,4v2" stroke-width="0.5"/>
+	</pattern>
+	<pattern id="g1" patternUnits="userSpaceOnUse" width="100" height="100">
+		<path d="M2,5h6M5,2v6" stroke-width="1.5"/>
+	</pattern>
+</defs>
+<g opacity=".25">
+	<use href="#b" fill="url(#g0)"/>
+	<use href="#b" fill="url(#g1)"/>
+</g>
+</svg>
+`
+};
+
+export default x=>(
+	x=tmpl({
+		title:'cm test',
+		desc:'codemirror test'
+	})(x),
+	x.html=new HTMLRewriter()
+	.on('ul',{element:e=>e.append(
+		Object.entries(sample).map(([i,x])=>`<li>${i}<pre data-lang="${i}">${Bun.escapeHTML(x)}</pre></li>`).join('\n'),
+		{html:1}
+	)})
+	.transform(x.html),
+	x
+);
 </script>
 <main>
-<h1>CodeMirror</h1>
-<ul>
-<li>cpp<pre data-lang="cpp">void main(){
-	gl_FragColor=vec4(1);
-}</pre></li>
-<li>css<pre data-lang="css">:root{color:#f0f;}</pre></li>
-<li>html<pre data-lang="html">&lt;style&gt;:root{color:#f0f;}&lt;/style&gt;
-&lt;script&gt;console.log('hello world!');&lt;/script&gt;</pre></li>
-<li>javascript<pre data-lang="javascript">console.log('hello world!');</pre></li>
-<li>json<pre data-lang="json">{"hello":"world!"}</pre></li>
-<li>markdown<pre data-lang="markdown"># hello world!
-```python
-	"""code goes here..."""
-```
-&lt;img src=""&gt;
-</pre></li>
-<li>xml<pre data-lang="html"></pre></li>
-
-</ul>
+<h1>test</h1>
+<ul></ul>
 </main>
 <script type="module">
 import{EditorView,setup}from'./index.mjs';
@@ -37,8 +63,9 @@ import{json}from'./json.mjs';
 import{markdown}from'./markdown.mjs';
 import{xml}from'./xml.mjs';
 
-const lang={cpp,css,html,javascript,json,markdown,xml};
-
-document.querySelectorAll('pre').forEach(x=>x.replaceWith(new EditorView({doc:x.textContent,extensions:[setup,lang[x.dataset.lang]()]}).dom))
+document.querySelectorAll('pre').forEach(x=>x.replaceWith(new EditorView({
+	doc:x.textContent,
+	extensions:[setup,{cpp,css,html,javascript,json,markdown,xml}[x.dataset.lang]()]
+}).dom))
 </script>
 
