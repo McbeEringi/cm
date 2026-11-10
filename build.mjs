@@ -1,5 +1,4 @@
 #!/bin/env -S bun
-import{codeToHtml}from 'shiki';
 
 await Bun.build({
 	entrypoints:[...new Bun.Glob('./src/*.mjs').scanSync('.')],
@@ -25,15 +24,18 @@ await Bun.write('./dst/index.html',`\
 <h1>CodeMirror</h1>
 <a href="https://github.com/McbeEringi/cm">GitHub</a>
 <ul>
-${(await Promise.all(['index.mjs',...[...await new Bun.Glob('!(index).mjs').scanSync('./dst')].sort()].map(async x=>`<li><a href="./${x}">${x}</a>
-${await codeToHtml(await Bun.file(`./src/${x}`).text(),{
-  lang:'javascript',
-	themes:{light:'one-light',dark:'one-dark-pro'},
-	defaultColor:false,
-})}
+${(await Promise.all(['index.mjs',...[...await new Bun.Glob('!(index).mjs').scanSync('./dst')].sort()].map(async x=>`<li>
+	<a href="./${x}">${x}</a>
+	<pre>${await Bun.file(`./src/${x}`).text()}</pre>
 </li>`))).join('\n')}
 </ul>
 </main>
+<script type="module">
+import{EditorView,setup}from'./index.mjs';
+import{javascript}from'./javascript.mjs';
+
+document.querySelectorAll('pre').forEach(x=>x.replaceWith(new EditorView({doc:x.textContent,extensions:[setup,javascript()]}).dom))
+</script>
 </body></html>
 `)
 await Bun.write('./dst/_headers',`\
