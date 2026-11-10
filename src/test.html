@@ -1,0 +1,44 @@
+<script type="build">
+import tmpl from'html_tmpl';
+
+export default tmpl({
+	title:'cm test',
+	desc:'codemirror test'
+});
+</script>
+<main>
+<h1>CodeMirror</h1>
+<ul>
+<li>cpp<pre data-lang="cpp">void main(){
+	gl_FragColor=vec4(1);
+}</pre></li>
+<li>css<pre data-lang="css">:root{color:#f0f;}</pre></li>
+<li>html<pre data-lang="html">&lt;style&gt;:root{color:#f0f;}&lt;/style&gt;
+&lt;script&gt;console.log('hello world!');&lt;/script&gt;</pre></li>
+<li>javascript<pre data-lang="javascript">console.log('hello world!');</pre></li>
+<li>json<pre data-lang="json">{"hello":"world!"}</pre></li>
+<li>markdown<pre data-lang="markdown"># hello world!
+```python
+	"""code goes here..."""
+```
+&lt;img src=""&gt;
+</pre></li>
+<li>xml<pre data-lang="html"></pre></li>
+
+</ul>
+</main>
+<script type="module">
+import{EditorView,setup}from'./index.mjs';
+import{cpp}from'./cpp.mjs';
+import{css}from'./css.mjs';
+import{html}from'./html.mjs';
+import{javascript}from'./javascript.mjs';
+import{json}from'./json.mjs';
+import{markdown}from'./markdown.mjs';
+import{xml}from'./xml.mjs';
+
+const lang={cpp,css,html,javascript,json,markdown,xml};
+
+document.querySelectorAll('pre').forEach(x=>x.replaceWith(new EditorView({doc:x.textContent,extensions:[setup,lang[x.dataset.lang]()]}).dom))
+</script>
+

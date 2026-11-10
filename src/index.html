@@ -1,0 +1,33 @@
+<script type="build">
+import tmpl from'html_tmpl';
+import bun_dle from'bun_dle';
+
+await bun_dle();
+
+export default async x=>(
+	x=tmpl({
+		title:'codemirror',
+		desc:'code editor coponents'
+	})(x),
+	x.html=new HTMLRewriter()
+	.on('#ml',{element:async e=>e.append(await['index.mjs',...[...await new Bun.Glob('!(index).mjs').scanSync('./dst')].sort()].reduce(async(a,x)=>`${await a}
+	<li>
+		<a href="./${x}">${x}</a>
+		<pre>${await Bun.file(`./src/${x}`).text()}</pre>
+	</li>`,''),{html:1})})
+	.transform(new Response(x.html)),
+	x
+)
+</script>
+<main>
+<h1>CodeMirror</h1>
+<a href="https://github.com/McbeEringi/cm">GitHub</a>
+<ul id="ml"></ul>
+</main>
+<script type="module">
+import{EditorView,setup}from'./index.mjs';
+import{javascript}from'./javascript.mjs';
+
+document.querySelectorAll('pre').forEach(x=>x.replaceWith(new EditorView({doc:x.textContent,extensions:[setup,javascript()]}).dom))
+</script>
+

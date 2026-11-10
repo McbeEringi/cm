@@ -11,6 +11,7 @@
     "wrangler": "^4.66.0"
   },
   "dependencies": {
+    "6ca-ssg": "git+https://github.com/mcbeeringi/6ca-ssg.git",
     "@codemirror/lang-cpp": "^6.0.3",
     "@codemirror/lang-css": "^6.3.1",
     "@codemirror/lang-html": "^6.4.12",
