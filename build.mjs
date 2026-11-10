@@ -7,9 +7,9 @@ await Bun.build({
 	outdir:'./dst',
 	naming: "[dir]/[name].mjs"
 });
-// await Bun.write('./dst/_redirects',`\
-// / /index.js 301
-// `);
+await Bun.write('./dst/_redirects',`\
+/src/:src https://6ca.me/src/:src 301
+`);
 await Bun.write('./dst/index.html',`\
 <!DOCTYPE html>
 <html><head>
