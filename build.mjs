@@ -4,6 +4,10 @@ await Bun.build({
 	minify:true,
 	outdir:'./dst'
 });
-await Bun.write('./dst/_redirects',`/ /index.js 301`);
-await Bun.write('./dst/_headers',`/*
-	Access-Control-Allow-Origin:*`);
+await Bun.write('./dst/_redirects',`\
+/ /index.js 301
+`);
+await Bun.write('./dst/_headers',`\
+/*
+	Access-Control-Allow-Origin:*
+`);
