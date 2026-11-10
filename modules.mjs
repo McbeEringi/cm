@@ -16,6 +16,9 @@ html_tmpl=c=>x=>({...x,html:`\
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>${c.title}</title>
 	<meta name="description" content="${c.desc}">
+	<link rel="icon" type="image/png" href="/img/favicon.png">
+	<link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+	<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 	<link href="/src/style.css" rel="stylesheet">
 ${x.style.length?`\t<style>${x.style.join('\n')}\t</style>\n`:''}\
 </head><body>
