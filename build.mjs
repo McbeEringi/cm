@@ -1,4 +1,4 @@
-#!/bin/bun
+#!/bin/env -S bun
 await Bun.build({
 	entrypoints:['./src/index.mjs'],
 	minify:true,
