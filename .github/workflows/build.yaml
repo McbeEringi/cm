@@ -26,9 +26,9 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
       - name: Install deps
-        run : bun i
-      - name: Run build.mjs
-        run : bun build.mjs
+        run : bun i -p
+      - name: Run 6ca-ssg
+        run : bun 6ca-ssg
       - name: Setup Pages
         uses: actions/configure-pages@v6
       - name: Upload artifact
