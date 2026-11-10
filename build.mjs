@@ -18,7 +18,6 @@ await Bun.write('./dst/index.html',`\
 <title>CodeMirror</title>
 <meta name="description" content="code editor components">
 <link href="/src/style.css" rel="stylesheet">
-<link href="/src/shiki.css" rel="stylesheet">
 </head><body>
 <main>
 <h1>CodeMirror</h1>
