@@ -13,14 +13,17 @@ await Bun.write('./dst/_redirects',`\
 `);
 await Bun.write('./dst/index.html',`\
 <!DOCTYPE html>
-<html><head>
+<html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CodeMirror</title>
+<meta name="description" content="code editor components">
 <link href="/src/style.css" rel="stylesheet">
 <link href="/src/shiki.css" rel="stylesheet">
 </head><body>
+<main>
 <h1>CodeMirror</h1>
+<a href="https://github.com/McbeEringi/cm">GitHub</a>
 <ul>
 ${(await Promise.all(['index.mjs',...[...await new Bun.Glob('!(index).mjs').scanSync('./dst')].sort()].map(async x=>`<li><a href="./${x}">${x}</a>
 ${await codeToHtml(await Bun.file(`./src/${x}`).text(),{
@@ -30,6 +33,7 @@ ${await codeToHtml(await Bun.file(`./src/${x}`).text(),{
 })}
 </li>`))).join('\n')}
 </ul>
+</main>
 </body></html>
 `)
 await Bun.write('./dst/_headers',`\
