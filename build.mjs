@@ -1,6 +1,6 @@
 #!/bin/env -S bun
 await Bun.build({
-	entrypoints:['./src/index.mjs'],
+	entrypoints:[...new Bun.Glob('src/*.mjs').scanSync('.')],
 	minify:true,
 	outdir:'./dst'
 });
