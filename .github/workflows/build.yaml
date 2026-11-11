@@ -1,4 +1,4 @@
-name: build.mjs
+name: 6ca-ssg
 
 on:
   push:
