@@ -1,7 +1,8 @@
 import{dirname,relative}from'node:path';
 
-const
-bun_dle=async()=>await Bun.build({
+export default ({args})=>({
+	
+bun_dle:async()=>await Bun.build({
 	entrypoints:[...new Bun.Glob('./src/*.mjs').scanSync('.')],
 	minify:true,
 	outdir:'./dst',
@@ -11,11 +12,11 @@ bun_dle=async()=>await Bun.build({
 	},
 	splitting:true
 }),
-html_tmpl=c=>x=>((
+html_tmpl:c=>x=>((
 	o=Object.entries({
 		cf:'https://cm.6ca.me/',
 		gh:'https://mcbeeringi.github.io/cm/'
-	}).reduce((a,[i,x])=>c.args.includes(i)?x:a,'')
+	}).reduce((a,[i,x])=>args.includes(i)?x:a,'')
 )=>({...x,html:`\
 <!DOCTYPE html>
 <html prefix="og:http://ogp.me/ns#" lang="en"><head>
@@ -36,5 +37,6 @@ ${x.style.length?`\t<style>${x.style.join('\n')}\t</style>\n`:''}\
 </head><body>
 ${x.html}\
 </body></html>
-`}))();
-export{bun_dle,html_tmpl};
+`}))()
+
+});

@@ -1,15 +1,13 @@
 <script type="build">
 import tmpl from'html_tmpl';
 import bun_dle from'bun_dle';
-import args from'args';
 
 await bun_dle();
 
 export default async x=>(
 	x=tmpl({
 		title:'codemirror',
-		desc:'code editor coponents',
-		args
+		desc:'code editor coponents'
 	})(x),
 	x.html=new HTMLRewriter()
 	.on('#ml',{element:async e=>e.append(await[
