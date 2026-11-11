@@ -2,7 +2,7 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "cm-6ca-me",
 	"compatibility_date": "2026-11-09",
-	"build":{"command":"bun 6ca-ssg","watch_dir":["src","modules.mjs"]},
+	"build":{"command":"bun 6ca-ssg cf","watch_dir":["src","modules.mjs"]},
 	"routes":[
 		{"pattern":"cm.6ca.me","custom_domain":true}
 	],

@@ -1,5 +1,6 @@
 <script type="build">
 import tmpl from'html_tmpl';
+import args from'args';
 
 const sample={
 	cpp:`void main(){
@@ -38,7 +39,8 @@ const sample={
 export default x=>(
 	x=tmpl({
 		title:'cm test',
-		desc:'codemirror test'
+		desc:'codemirror test',
+		args
 	})(x),
 	x.html=new HTMLRewriter()
 	.on('ul',{element:e=>e.append(
