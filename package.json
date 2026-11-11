@@ -1,6 +1,5 @@
 {
   "name": "cm.6ca.me",
-  "module": "index.mjs",
   "type": "module",
   "scripts": {
     "deploy": "wrangler deploy",

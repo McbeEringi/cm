@@ -11,7 +11,7 @@ bun_dle=async()=>await Bun.build({
 }),
 html_tmpl=c=>x=>({...x,html:`\
 <!DOCTYPE html>
-<html lang="en"><head>
+<html prefix="og:http://ogp.me/ns#" lang="en"><head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>${c.title}</title>
@@ -19,6 +19,11 @@ html_tmpl=c=>x=>({...x,html:`\
 	<link rel="icon" type="image/png" href="/img/favicon.png">
 	<link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
 	<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="${c.title}">
+	<meta property="og:description" content="${c.desc}">
+	<meta property="og:url" content="${new URL(x.path,'https://cm.6ca.me/')}">
+	<meta property="og:image" content="https://cm.6ca.me/img/apple-touch-icon.png">
 	<link href="/src/style.css" rel="stylesheet">
 ${x.style.length?`\t<style>${x.style.join('\n')}\t</style>\n`:''}\
 </head><body>
